@@ -1,44 +1,58 @@
 import { useEffect, useState } from 'react'
-import { db, type TestData } from './db'
+import { getBookCover, saveBookCover } from './services/covers'
+
+const testBookId = 'cover-test'
 
 function App() {
-  const [data, setData] = useState<TestData | null>(null)
+  const [coverUrl, setCoverUrl] = useState<string | null>(null)
+  const [status, setStatus] = useState('Checking local database...')
 
   useEffect(() => {
-    db.testData
-      .orderBy('createdAt')
-      .last()
-      .then((result) => {
-        setData(result ?? null)
-      })
+    loadCover()
   }, [])
 
-  async function saveTestData() {
-    const newData: TestData = {
-      id: 1,
-      message: `Saved at ${new Date().toLocaleString()}`,
-      createdAt: Date.now(),
+  async function loadCover() {
+    const cover = await getBookCover(testBookId)
+
+    if (!cover) {
+      setStatus('No local cover yet.')
+      return
     }
 
-    await db.testData.put(newData)
-    setData(newData)
+    setCoverUrl(URL.createObjectURL(cover.blob))
+    setStatus('Cover loaded from local database.')
+  }
+
+  async function downloadCover() {
+    setStatus('Downloading cover...')
+
+    const url =
+      'https://covers.openlibrary.org/b/isbn/9780439554930-M.jpg'
+
+    await saveBookCover(testBookId, url)
+
+    await loadCover()
   }
 
   return (
     <main style={{ padding: 24 }}>
       <h1>Shelly</h1>
 
-      <h2>Local database test</h2>
+      <h2>Cover storage test</h2>
 
-      <button onClick={saveTestData}>
-        Save test data
+      <button onClick={downloadCover}>
+        Download and save cover
       </button>
 
-      <p>
-        {data
-          ? `Saved value: ${data.message}`
-          : 'No data saved yet.'}
-      </p>
+      <p>{status}</p>
+
+      {coverUrl && (
+        <img
+          src={coverUrl}
+          alt="Test book cover"
+          style={{ width: 180 }}
+        />
+      )}
     </main>
   )
 }
