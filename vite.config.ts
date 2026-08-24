@@ -11,6 +11,11 @@ export default defineConfig({
     VitePWA({
       registerType: 'autoUpdate',
 
+      workbox: {
+        skipWaiting: true,
+        clientsClaim: true,
+      },
+
       manifest: {
         name: 'Shelly',
         short_name: 'Shelly',
