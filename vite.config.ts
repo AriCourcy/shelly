@@ -1,7 +1,39 @@
-import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import { VitePWA } from 'vite-plugin-pwa'
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  base: '/shelly/',
+
+  plugins: [
+    react(),
+
+    VitePWA({
+      registerType: 'autoUpdate',
+
+      manifest: {
+        name: 'Shelly',
+        short_name: 'Shelly',
+        description: 'A local reading tracker',
+        theme_color: '#ffffff',
+        background_color: '#ffffff',
+        display: 'standalone',
+        start_url: '/shelly/',
+        scope: '/shelly/',
+
+        icons: [
+          {
+            src: '/shelly/icons/icon_192X192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/shelly/icons/icon_512X512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+        ],
+      },
+    }),
+  ],
 })
