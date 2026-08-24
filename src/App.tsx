@@ -38,7 +38,7 @@ function App() {
     <main style={{ padding: 24 }}>
       <h1>Shelly</h1>
 
-      <h2>Cover storage test</h2>
+      <h2>Cover storage test part 2</h2>
 
       <button onClick={downloadCover}>
         Download and save cover
