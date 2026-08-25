@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react'
-import { getBookCover, saveBookCover } from './services/covers'
-import { searchBooks } from './services/books'
-import Home from './pages/home/home'
+import { searchBooks } from '../../services/books'
 
-function App() {
+export default function Home() {
   const [books, setBooks] = useState([])
 
   async function loadBooks(e) {
@@ -21,10 +19,10 @@ function App() {
   }
 
   return (
-    <main style={{ padding: 24 }}>
-      <Home></Home>
-    </main>
+    <form onSubmit={loadBooks}>
+      <input name="query" />
+      <button type="submit">Search</button>
+    </form>
   )
 }
 
-export default App
