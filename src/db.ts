@@ -1,13 +1,12 @@
 import Dexie, { type EntityTable } from 'dexie'
 
 export interface Book {
-  id: string
+  id?: string
   isbn?: string
   title: string
-  url?: string
+  coverUrl?: string
   pages?: number
   type?: string
-  description?: string
   author?: string
   publicationDate?: Date
   publishingHouse?: string
