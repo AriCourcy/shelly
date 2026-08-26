@@ -1,5 +1,4 @@
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
-import Home from './home'
+import { useNavigate } from 'react-router-dom'
 import { AppBar, IconButton } from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home'
 

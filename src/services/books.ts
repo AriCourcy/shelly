@@ -1,5 +1,19 @@
 import { db, type Book } from '../db'
 
+type OpenLibrarySearchDoc = {
+  title?: string
+  author_name?: string[]
+  isbn?: string[]
+  cover_i?: number
+  number_of_pages_median?: number
+  first_publish_year?: number
+  publisher?: string[]
+  key?: string
+  edition_key?: string[]
+  ebook_access?: string
+}
+
+
 export async function searchBooks(query: string) {
     const url = new URL("https://openlibrary.org/search.json")
     url.searchParams.set("q", query);  
@@ -37,10 +51,8 @@ export async function saveBook(
   id: string,
   title: string,
   isbn?: string,
-  url?: string,
   pages?: number,
   type?: string,
-  description?: string,
   author?: string,
   publicationDate?: Date,
   publishingHouse?: string,
@@ -48,14 +60,12 @@ export async function saveBook(
   openLibraryEditionId?: string,
 ) {
 
-  await db.book.put({
+  await db.books.put({
   id,
   isbn,
   title,
-  url,
   pages,
   type,
-  description,
   author,
   publicationDate,
   publishingHouse,

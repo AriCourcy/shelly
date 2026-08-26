@@ -1,7 +1,4 @@
-import { useEffect, useState } from 'react'
-import { getBookCover, saveBookCover } from './services/covers'
-import { searchBooks } from './services/books'
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './pages/home'
 import NavBar from './pages/navBar'
 import { createTheme, ThemeProvider } from '@mui/material/styles'
@@ -15,21 +12,6 @@ const theme = createTheme({
 })
 
 function App() {
-  const [books, setBooks] = useState([])
-
-  async function loadBooks(e) {
-    
-    e.preventDefault()
-
-    const form = e.target
-    const formData = new FormData(form)
-    const query = formData.get('query')
-
-    searchBooks(query).then(result => {
-      setBooks(result)
-    })
-
-  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -38,7 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
         </Routes>
-        <NavBar styles={{ alignSelf: 'end' }}></NavBar>
+        <NavBar></NavBar>
       </BrowserRouter>
     </main>
     </ThemeProvider>
