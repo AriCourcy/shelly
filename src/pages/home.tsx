@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { searchBooks } from '../../services/books'
+import { searchBooks } from '../services/books'
 
 export default function Home() {
   const [books, setBooks] = useState([])
@@ -19,10 +19,14 @@ export default function Home() {
   }
 
   return (
-    <form onSubmit={loadBooks}>
-      <input name="query" />
-      <button type="submit">Search</button>
-    </form>
+    <div style={{ display: 'flex', flexGrow: 1, flexDirection: 'column' }}>
+      <form onSubmit={loadBooks} style={{ display: 'flex',  }}>
+        <input name="query" />
+        <button type="submit">Search</button>
+      </form>
+      <div style={{ display: 'flex', flexGrow: 1 }}>
+      </div>
+    </div>
   )
 }
 
