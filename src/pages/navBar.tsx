@@ -1,17 +1,17 @@
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 import Home from './home'
-import { Icon } from '@mdi/react'
-import { mdiHome } from '@mdi/js'
+import { AppBar, IconButton } from '@mui/material'
+import HomeIcon from '@mui/icons-material/Home'
 
 function NavBar() {
   const navigate = useNavigate()
 
   return (
-      <div style={{ backgroundColor: '#a6ca93', display: 'flex', justifyContent: 'space-around', borderRadius: 4 }}>
-        <button onClick={() => navigate("/")} style={{ backgroundColor: 'transparent', borderWidth: 0 }}>
-          <Icon path={mdiHome} size={1.5} color='black' />
-        </button>
-      </div>
+      <AppBar position='relative' >
+        <IconButton aria-label="home" onClick={() => navigate("/")} sx={{ padding: 0 }} >
+            <HomeIcon sx={{ fontSize: 38, color: 'black' }} />
+        </IconButton>
+      </AppBar>
   )
 }
 

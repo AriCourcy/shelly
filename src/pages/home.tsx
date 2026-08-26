@@ -19,7 +19,7 @@ export default function Home() {
   }
 
   return (
-    <div style={{ display: 'flex', flexGrow: 1, flexDirection: 'column' }}>
+    <div style={{ display: 'flex', flexGrow: 1, flexDirection: 'column', padding: 24 }}>
       <form onSubmit={loadBooks} style={{ display: 'flex',  }}>
         <input name="query" />
         <button type="submit">Search</button>
