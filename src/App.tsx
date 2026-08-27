@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './pages/home'
-import Settings from './pages/settings'
-import NavBar from './pages/navBar'
-import CustomTheme from './theme/customTheme'
+import Home from './pages/Home'
+import Settings from './pages/Settings'
+import NavBar from './pages/Navbar'
+import CustomTheme from './theme/CustomTheme'
 
 function App() {
 

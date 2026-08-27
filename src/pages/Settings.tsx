@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { ThemeContext } from '../theme/customTheme' 
+import { ThemeContext } from '../theme/CustomTheme' 
 
 function Settings() {
 
