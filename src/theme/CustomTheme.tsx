@@ -1,5 +1,6 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { createContext, useState, type ReactNode } from 'react'
+import { createContext, useState, useEffect, type ReactNode } from 'react'
+import { useColorScheme } from '@mui/material/styles'
 
 export const themes = {
   GREEN: createTheme({
@@ -60,7 +61,14 @@ export const themes = {
 export const ThemeContext = createContext<any>(null)
 
 function CustomTheme({ children }: { children: ReactNode }) {
+  const { mode } = useColorScheme()
+
   const [theme, setTheme] = useState<'GREEN' | 'PINK'>('GREEN')
+
+  useEffect (() => {
+    debugger
+    document.documentElement.style.setProperty("--bg", themes[theme].colorSchemes[mode ?? 'light'].palette.background.default)
+  }, [theme])
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
