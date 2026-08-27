@@ -1,6 +1,6 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { createContext, useState, useEffect, type ReactNode } from 'react'
-import { useColorScheme } from '@mui/material/styles'
+import { useColorScheme, CssVarsProvider } from '@mui/material/styles'
 
 export const themes = {
   GREEN: createTheme({
@@ -60,15 +60,15 @@ export const themes = {
 
 export const ThemeContext = createContext<any>(null)
 
-function CustomTheme({ children }: { children: ReactNode }) {
+function CustomThemeContent({ children }: { children: ReactNode }) {
   const { mode } = useColorScheme()
 
   const [theme, setTheme] = useState<'GREEN' | 'PINK'>('GREEN')
 
   useEffect (() => {
-    debugger
-    document.documentElement.style.setProperty("--bg", themes[theme].colorSchemes[mode ?? 'light'].palette.background.default)
-  }, [theme])
+    console.log(mode)
+    document.documentElement.style.setProperty("--bg", (themes[theme] as any).colorSchemes[mode ?? 'light'].palette.background.default)
+  }, [mode])
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
@@ -76,6 +76,14 @@ function CustomTheme({ children }: { children: ReactNode }) {
         {children}
       </ThemeProvider>
     </ThemeContext.Provider>
+  )
+}
+
+function CustomTheme({ children }: { children: ReactNode }) {
+  return (
+    <CssVarsProvider defaultMode="light">
+      <CustomThemeContent>{children}</CustomThemeContent>
+    </CssVarsProvider>
   )
 }
 
