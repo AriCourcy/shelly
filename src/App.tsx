@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Container from '@mui/material/Container'
 import Home from './pages/Home'
 import Settings from './pages/Settings'
 import NavBar from './pages/Navbar'
@@ -8,14 +9,16 @@ function App() {
 
   return (
     <CustomTheme>
-      <main style={{ display: 'flex', flexGrow: 1, flexDirection: 'column' }}>
-        <BrowserRouter basename="/shelly">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/settings" element={<Settings />} />
-          </Routes>
-          <NavBar></NavBar>
-        </BrowserRouter>
+      <main style={{ display: 'flex', flexGrow: 1, flexDirection: 'column'}} >
+        <Container sx={{ bgcolor: 'background.default', display: 'flex', flexGrow: 1, flexDirection: 'column', padding: 0 }}>
+            <BrowserRouter basename='/shelly'>
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/settings' element={<Settings />} />
+              </Routes>
+              <NavBar></NavBar>
+            </BrowserRouter>
+        </Container>
       </main>
     </CustomTheme>
   )

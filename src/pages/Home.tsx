@@ -12,9 +12,9 @@ export default function Home() {
 
     //const form = e.target
     const formData = new FormData(e.currentTarget)
-    const query = formData.get("query")
+    const query = formData.get('query')
 
-        if (typeof query !== "string" || !query.trim()) {
+        if (typeof query !== 'string' || !query.trim()) {
           return
         }
 
@@ -27,8 +27,8 @@ export default function Home() {
   return (
     <div style={{ display: 'flex', flexGrow: 1, flexDirection: 'column', padding: 24 }}>
       <form onSubmit={loadBooks} style={{ display: 'flex',  }}>
-        <input name="query" />
-        <button type="submit">Search</button>
+        <input name='query' />
+        <button type='submit'>Search</button>
       </form>
       <div style={{ display: 'flex', flexGrow: 1 }}>
             <ul>        
