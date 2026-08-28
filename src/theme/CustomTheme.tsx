@@ -65,9 +65,19 @@ function CustomThemeContent({ children }: { children: ReactNode }) {
 
   const [theme, setTheme] = useState<'GREEN' | 'PINK'>('GREEN')
 
-  useEffect (() => {
-    document.documentElement.style.setProperty("--bg", (themes[theme] as any).colorSchemes[mode ?? 'light'].palette.background.default)
-  }, [mode])
+
+  useEffect(() => {
+    const color = (themes[theme] as any) .colorSchemes[mode ?? "light"] .palette.background.default
+
+    document.documentElement.style.setProperty("--bg", color)
+
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement | null
+
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute("content", color)
+    }
+
+  }, [theme, mode])
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
