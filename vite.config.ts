@@ -22,7 +22,7 @@ export default defineConfig({
         description: 'A local reading tracker',
         theme_color: '#ffffff',
         background_color: '#ffffff',
-        display: 'standalone',
+        display: 'fullscreen',
         start_url: '/shelly/',
         scope: '/shelly/',
 
