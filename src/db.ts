@@ -21,14 +21,35 @@ export interface BookCover {
   sourceId?: string
 }
 
+export interface Preference {
+  id: string
+  value: string
+}
+
 const db = new Dexie('ShellyDatabase') as Dexie & {
   books: EntityTable<Book, 'id'>
   bookCovers: EntityTable<BookCover, 'bookId'>
+  preferences: EntityTable<Preference, 'id'>
 }
 
 db.version(1).stores({
   books: 'id, isbn, title, author, publicationDate',
   bookCovers: 'bookId, sourceId',
+  preferences: 'id, value',
 })
+
+export async function populate() {
+  await db.preferences.add({
+    id: "theme",
+    value: "GREEN"
+  })
+
+  await db.preferences.add({
+    id: "mode",
+    value: "light"
+  })
+}
+
+db.on('populate', populate)
 
 export { db }
