@@ -20,9 +20,9 @@ export default defineConfig({
         name: 'Shelly',
         short_name: 'Shelly',
         description: 'A local reading tracker',
-        theme_color: '#00ffff',
-        background_color: '#00ffff',
-        display: 'standalone',
+        theme_color: '#ffffff',
+        background_color: '#ffffff',
+        display: 'fullscreen',
         start_url: '/shelly/',
         scope: '/shelly/',
 
