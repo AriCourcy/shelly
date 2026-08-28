@@ -67,7 +67,6 @@ function CustomThemeContent({ children }: { children: ReactNode }) {
 
   useEffect (() => {
     document.documentElement.style.setProperty("--bg", (themes[theme] as any).colorSchemes[mode ?? 'light'].palette.background.default)
-    console.log(document.querySelector('meta[name="theme-color"]').content)
   }, [mode])
 
   return (
