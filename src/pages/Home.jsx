@@ -1,16 +1,13 @@
 import { useState } from 'react'
-import type { FormEvent } from "react"
 import { searchBooks } from '../services/books'
-import { type Book } from '../db'
 
 export default function Home() {
-  const [books, setBooks] = useState<Book[]>([])
+  const [books, setBooks] = useState([])
 
-  async function loadBooks(e: FormEvent<HTMLFormElement>) {
+  async function loadBooks(e) {
     
     e.preventDefault()
 
-    //const form = e.target
     const formData = new FormData(e.currentTarget)
     const query = formData.get('query')
 

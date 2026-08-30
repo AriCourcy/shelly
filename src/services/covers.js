@@ -1,9 +1,9 @@
 import { db } from '../db'
 
 export async function saveBookCover(
-  bookId: string,
-  coverUrl: string,
-  sourceId?: string,
+  bookId,
+  coverUrl,
+  sourceId?,
 ) {
   const response = await fetch(coverUrl)
 
@@ -21,6 +21,6 @@ export async function saveBookCover(
   })
 }
 
-export async function getBookCover(bookId: string) {
+export async function getBookCover(bookId) {
   return db.bookCovers.get(bookId)
 }

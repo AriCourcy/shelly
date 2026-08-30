@@ -1,20 +1,6 @@
-import { db, type Book } from '../db'
+import { db } from '../db'
 
-type OpenLibrarySearchDoc = {
-  title?: string
-  author_name?: string[]
-  isbn?: string[]
-  cover_i?: number
-  number_of_pages_median?: number
-  first_publish_year?: number
-  publisher?: string[]
-  key?: string
-  edition_key?: string[]
-  ebook_access?: string
-}
-
-
-export async function searchBooks(query: string) {
+export async function searchBooks(query) {
     const url = new URL("https://openlibrary.org/search.json")
     url.searchParams.set("q", query);  
     url.searchParams.set("limit", "10");  
@@ -24,12 +10,12 @@ export async function searchBooks(query: string) {
     .then(response => response.json())
     .catch(error => console.error('Error:', error))
 
-  const books: Book[] = response.docs.map(mapOpenLibraryBook)
+  const books = response.docs.map(mapOpenLibraryBook)
 
   return books
 }
 
-function mapOpenLibraryBook(doc: OpenLibrarySearchDoc): Book {
+function mapOpenLibraryBook(doc) {
   const workId = doc.key?.replace("/works/", "")
   const editionId = doc.edition_key?.[0]
 
@@ -48,16 +34,16 @@ function mapOpenLibraryBook(doc: OpenLibrarySearchDoc): Book {
 }
 
 export async function saveBook(
-  id: string,
-  title: string,
-  isbn?: string,
-  pages?: number,
-  type?: string,
-  author?: string,
-  publicationDate?: Date,
-  publishingHouse?: string,
-  openLibraryWorkId?: string,
-  openLibraryEditionId?: string,
+  id,
+  title,
+  isbn,
+  pages,
+  type,
+  author,
+  publicationDate,
+  publishingHouse,
+  openLibraryWorkId,
+  openLibraryEditionId,
 ) {
 
   await db.books.put({
@@ -74,6 +60,6 @@ export async function saveBook(
   })
 }
 
-export async function getBook(id: string) {
+export async function getBook(id) {
   return db.books.get(id)
 }

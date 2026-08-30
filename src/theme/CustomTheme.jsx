@@ -1,10 +1,7 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles'
-import { createContext, useState, useEffect, type ReactNode } from 'react'
+import { createContext, useState, useEffect } from 'react'
 import { useColorScheme, CssVarsProvider } from '@mui/material/styles'
 import { saveTheme, getTheme, saveMode, getMode } from '../services/preferences'
-
-export type Theme = Extract<'GREEN' | 'PINK', string>
-export type Mode = 'light' | 'dark'
 
 const DEFAULT = 'GREEN'
 export const themes = {
@@ -63,12 +60,12 @@ export const themes = {
   }),
 }
 
-export const ThemeContext = createContext<any>(null)
+export const ThemeContext = createContext(null)
 
-function CustomThemeContent({ children }: { children: ReactNode }) {
+function CustomThemeContent({ children}) {
   const { mode, setMode } = useColorScheme()
 
-  const [theme, setTheme] = useState<Theme>()
+  const [theme, setTheme] = useState()
 
   useEffect(() => {
     async function initializeColor() {
@@ -83,13 +80,13 @@ function CustomThemeContent({ children }: { children: ReactNode }) {
     async function setColor() {
       if (!theme) return
 
-      await saveTheme(theme as Theme)
-      await saveMode(mode as Mode)
+      await saveTheme(theme)
+      await saveMode(mode)
 
-      const color = (themes[theme] as any).colorSchemes[mode ?? "light"].palette.background.default
+      const color = (themes[theme]).colorSchemes[mode ?? "light"].palette.background.default
       document.documentElement.style.setProperty("--bg", color)
 
-      const metaThemeColor = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement | null
+      const metaThemeColor = document.querySelector('meta[name="theme-color"]') | null
 
       if (metaThemeColor) {
         metaThemeColor.setAttribute("content", color)
@@ -108,7 +105,7 @@ function CustomThemeContent({ children }: { children: ReactNode }) {
   )
 }
 
-function CustomTheme({ children }: { children: ReactNode }) {
+function CustomTheme({ children }) {
   return (
     <CssVarsProvider defaultMode="light">
       <CustomThemeContent>{children}</CustomThemeContent>
