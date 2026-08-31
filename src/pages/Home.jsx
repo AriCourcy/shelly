@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import { searchBooks } from '../services/books'
+import { useTranslation } from 'react-i18next'
 
 export default function Home() {
+
+  const { t, i18n } = useTranslation()
+
   const [books, setBooks] = useState([])
 
   async function loadBooks(e) {
@@ -25,7 +29,7 @@ export default function Home() {
     <div style={{ display: 'flex', flexGrow: 1, flexDirection: 'column', padding: 24 }}>
       <form onSubmit={loadBooks} style={{ display: 'flex',  }}>
         <input name='query' />
-        <button type='submit'>Search</button>
+        <button type='submit'>{t('search')}</button>
       </form>
       <div style={{ display: 'flex', flexGrow: 1 }}>
             <ul>        

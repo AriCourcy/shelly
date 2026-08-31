@@ -16,7 +16,12 @@ export async function populate() {
 
   await db.preferences.add({
     id: "mode",
-    value: "light"
+    value: "light",
+  })
+
+  await db.preferences.add({
+    id: "language",
+    value: "en",
   })
 }
 
