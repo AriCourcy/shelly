@@ -17,3 +17,12 @@ export async function getMode() {
   const mode = await db.preferences.get('mode')
   return mode.value
 }
+
+export async function saveLanguage(language) {
+  await db.preferences.update('language', { 'value': language })
+}
+
+export async function getLanguage() {
+  const language = await db.preferences.get('language')
+  return language.value
+}

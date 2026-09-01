@@ -62,7 +62,7 @@ export const themes = {
 
 export const ThemeContext = createContext(null)
 
-function CustomThemeContent({ children}) {
+function CustomThemeContent({ children }) {
   const { mode, setMode } = useColorScheme()
 
   const [theme, setTheme] = useState()
