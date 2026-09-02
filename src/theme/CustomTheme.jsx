@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles'
 import { createContext, useState, useEffect } from 'react'
 import { useColorScheme, CssVarsProvider } from '@mui/material/styles'
-import { saveTheme, getTheme, saveMode, getMode } from '../services/preferences'
+import { save, get } from '../services/preferences'
 
 const DEFAULT = 'GREEN'
 export const themes = {
@@ -65,12 +65,12 @@ export const ThemeContext = createContext(null)
 function CustomThemeContent({ children }) {
   const { mode, setMode } = useColorScheme()
 
-  const [theme, setTheme] = useState()
+  const [tint, setTint] = useState()
 
   useEffect(() => {
     async function initializeColor() {
-      setTheme(await getTheme())
-      setMode(await getMode())
+      setTint(await get('tint'))
+      setMode(await get('mode'))
     }
 
     initializeColor()
@@ -78,12 +78,12 @@ function CustomThemeContent({ children }) {
 
   useEffect(() => {
     async function setColor() {
-      if (!theme) return
+      if (!tint) return
 
-      await saveTheme(theme)
-      await saveMode(mode)
+      await save('tint', tint)
+      await save('mode', mode)
 
-      const color = (themes[theme]).colorSchemes[mode ?? "light"].palette.background.default
+      const color = (themes[tint]).colorSchemes[mode ?? "light"].palette.background.default
       document.documentElement.style.setProperty("--bg", color)
 
       const metaThemeColor = document.querySelector('meta[name="theme-color"]') | null
@@ -94,11 +94,11 @@ function CustomThemeContent({ children }) {
     }
 
     setColor()
-  }, [theme, mode])
+  }, [tint, mode])
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <ThemeProvider theme={themes[theme?? DEFAULT]}>
+    <ThemeContext.Provider value={{ tint, setTint }}>
+      <ThemeProvider theme={themes[tint?? DEFAULT]}>
         {children}
       </ThemeProvider>
     </ThemeContext.Provider>

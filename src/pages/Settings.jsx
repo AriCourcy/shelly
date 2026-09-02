@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react'
 import { ThemeContext } from '../theme/CustomTheme' 
 import { useColorScheme } from '@mui/material/styles'
 import { useTranslation } from 'react-i18next'
-import { saveLanguage, getLanguage } from '../services/preferences'
+import { save, get } from '../services/preferences'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
 
@@ -12,17 +12,17 @@ function Settings() {
 
   useEffect(() => {
     async function init() {
-      i18n.changeLanguage(await getLanguage())
+      i18n.changeLanguage(await get('language'))
     }
 
     init()
   }, [])
 
-  const { theme, setTheme } = useContext(ThemeContext)
+  const { tint, setTint } = useContext(ThemeContext)
   const { mode, setMode } = useColorScheme()
 
   const changeLanguage = (event) => {
-    saveLanguage(event.target.value)
+    save('language', event.target.value)
     i18n.changeLanguage(event.target.value)
   }
 
@@ -31,9 +31,9 @@ function Settings() {
           <label>
         <input
           type='checkbox'
-          checked={theme === 'PINK'}
+          checked={tint === 'PINK'}
           onChange={(e) => {
-            setTheme(e.target.checked ? 'PINK' : 'GREEN')
+            setTint(e.target.checked ? 'PINK' : 'GREEN')
           }}
         />
         Use pink mode
