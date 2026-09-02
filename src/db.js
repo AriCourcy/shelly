@@ -10,7 +10,7 @@ db.version(1).stores({
 
 export async function populate() {
   await db.preferences.add({
-    id: "theme",
+    id: "tint",
     value: "GREEN"
   })
 
