@@ -8,7 +8,8 @@ const resources = {
       'language': 'Language',
       'english': 'English',
       'french': 'French',
-      'hi': 'Hi!',
+      'pink': 'Pink',
+      'green': 'Green',
     }
   },
   fr: {
@@ -17,7 +18,8 @@ const resources = {
       'language': 'Langue',
       'english': 'Anglais',
       'french': 'Français',
-      'hi': 'Bonjour!',
+      'pink': 'Rose',
+      'green': 'Vert',
     }
   }
 }
