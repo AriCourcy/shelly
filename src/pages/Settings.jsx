@@ -5,21 +5,33 @@ import { useTranslation } from 'react-i18next'
 import { save, get } from '../services/preferences'
 import Select from '@mui/material/Select'
 import MenuItem from '@mui/material/MenuItem'
+import IconButton from '@mui/material/IconButton'
+import SunnyIcon from '@mui/icons-material/Sunny'
+import BedtimeIcon from '@mui/icons-material/Bedtime'
 
 function Settings() {
 
   const { t, i18n } = useTranslation()
+  const { tint, setTint } = useContext(ThemeContext)
+  const { mode, setMode } = useColorScheme()
 
   useEffect(() => {
     async function init() {
       i18n.changeLanguage(await get('language'))
+      setTint(await get('tint'))
+      setMode(await get('mode'))
     }
 
     init()
   }, [])
 
-  const { tint, setTint } = useContext(ThemeContext)
-  const { mode, setMode } = useColorScheme()
+  const changeTint = (event) => {
+    setTint(event.target.value)
+  }
+
+  const changeMode = () => {
+    setMode(mode == 'dark' ? 'light' : 'dark')
+  }
 
   const changeLanguage = (event) => {
     save('language', event.target.value)
@@ -27,40 +39,39 @@ function Settings() {
   }
 
   return (
-    <div style={{ display: 'flex', flexGrow: 1, flexDirection: 'column', padding: 24 }}>
-          <label>
-        <input
-          type='checkbox'
-          checked={tint === 'PINK'}
-          onChange={(e) => {
-            setTint(e.target.checked ? 'PINK' : 'GREEN')
-          }}
-        />
-        Use pink mode
-      </label>
-          <label>
-        <input
-          type='checkbox'
-          checked={mode === 'dark'}
-          onChange={(e) => {
-            setMode(e.target.checked ? 'dark' : 'light')
-          }}
-        />
-        Use dark mode
-      </label>
+    <div style={{ display: 'flex', flexGrow: 1, flexDirection: 'column', padding: 24, gap: 16 }}>
+      <div style={{ display: 'flex', gap: 4 }}>
+        <Select
+          labelId='select-tint'
+          id='select-tint'
+          value={tint ?? 'GREEN'}
+          onChange={changeTint}
+          style = {{ flexGrow: 1 }}
+        >
+          <MenuItem value={'PINK'}>{t('pink')}</MenuItem>
+          <MenuItem value={'GREEN'}>{t('green')}</MenuItem>
+        </Select>
+
+        <IconButton aria-label='mode' onClick={changeMode} sx={{ padding: 0 }} >
+            {
+              mode == 'dark' ?
+                <BedtimeIcon sx={{ fontSize: 38, color: 'white' }} />
+              :
+                <SunnyIcon sx={{ fontSize: 38, color: 'black' }} />
+            }
+        </IconButton>
+      </div>
 
         <Select
           labelId='select-language'
           id='select-language'
           value={i18n.language}
-          label={t('language')}
           onChange={changeLanguage}
         >
           <MenuItem value={'fr'}>{t('french')}</MenuItem>
           <MenuItem value={'en'}>{t('english')}</MenuItem>
         </Select>
 
-        <p>{t('hi')}</p>
     </div>
   )
 }
