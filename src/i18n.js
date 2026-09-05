@@ -10,6 +10,9 @@ const resources = {
       'french': 'French',
       'pink': 'Pink',
       'green': 'Green',
+      'discover-next-read': 'Discover your next read',
+      'search-by-title': 'Search by title',
+      'no-books-found': 'No books found for ',
     }
   },
   fr: {
@@ -20,6 +23,9 @@ const resources = {
       'french': 'Français',
       'pink': 'Rose',
       'green': 'Vert',
+      'discover-next-read': 'Découvre ta prochaine lecture',
+      'search-by-title': 'Recherche par le titre',
+      'no-books-found': 'Aucun livres trouvés pour  ',
     }
   }
 }

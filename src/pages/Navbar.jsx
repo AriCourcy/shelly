@@ -8,7 +8,7 @@ function NavBar() {
   const navigate = useNavigate()
 
   return (
-      <AppBar position='relative' sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 4, borderRadius: 4, bgcolor: 'primary.main' }} >
+      <AppBar position='fixed' sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-around', paddingBottom: 5, paddingTop: 2, borderRadius: 4, bgcolor: 'primary.main', bottom: 0, height: 64, top: 'auto' }} >
         <IconButton aria-label='home' onClick={() => navigate('/')} sx={{ padding: 0 }} >
             <HomeIcon sx={{ fontSize: 38, color: 'black' }} />
         </IconButton>
