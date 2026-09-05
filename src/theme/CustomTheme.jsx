@@ -13,7 +13,7 @@ export const themes = {
             main: '#a6ca93',
           },
           background: { 
-            default: '#ffffff',
+            default: 'grey.50',
             paper: '#ffffff',      
           },
         },
@@ -40,7 +40,7 @@ export const themes = {
             main: '#d822ba',
           },
           background: { 
-            default: '#ffffff',
+            default: 'grey.50',
             paper: '#ffffff',      
           },
         },
