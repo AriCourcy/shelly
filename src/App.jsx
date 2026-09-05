@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Container from '@mui/material/Container'
 import Home from './pages/Home'
 import Settings from './pages/Settings'
+import Search from './pages/Search'
 import NavBar from './pages/Navbar'
 import CustomTheme from './theme/CustomTheme'
 
@@ -15,6 +16,7 @@ function App() {
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/settings' element={<Settings />} />
+                <Route path='/Search' element={<Search />} />
               </Routes>
               <NavBar></NavBar>
             </BrowserRouter>

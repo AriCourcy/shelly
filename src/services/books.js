@@ -22,7 +22,7 @@ function mapOpenLibraryBook(doc) {
   return {    
     isbn: doc.isbn?.[0],
     title: doc.title ?? "Untitled",
-    coverUrl: doc.cover_i ? `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg` : undefined,
+    coverUrl: doc.cover_i ? `https://covers.openlibrary.org/b/id/${doc.cover_i}-S.jpg` : undefined,
     pages: doc.number_of_pages_median,
     author: doc.author_name?.join(", "),
     publicationDate: doc.first_publish_year ? new Date(`${doc.first_publish_year}-01-01`) : undefined,
