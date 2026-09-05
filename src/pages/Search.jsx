@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next'
 import TextField from '@mui/material/TextField'
 import Button from '@mui/material/Button'
 import SendIcon from '@mui/icons-material/Send'
+import Box from '@mui/material/Box'
 
 export default function Search() {
 
@@ -30,7 +31,7 @@ export default function Search() {
   }
 
   return (
-    <div style={{ display: 'flex', flexGrow: 1, flexDirection: 'column', padding: 24 }}>
+    <div style={{ display: 'flex', flexGrow: 1, flexDirection: 'column', padding: 24, gap: 8 }}>
       <form onSubmit={loadBooks} style={{ display: 'flex', gap: 8 }}>
         <TextField
           label='Find a book'
@@ -43,10 +44,21 @@ export default function Search() {
         </Button>
      </form>
 
-      <div style={{ display: 'flex', flexGrow: 1 }}>
-            <ul>        
-              {books.map((book, index) => (<li key={book.id ?? index}>{book.title}</li>))}
-            </ul>
+      <div style={{ display: 'flex', flexGrow: 1, flexDirection: 'column', gap: 8, maxHeight: '100vh', overflowY: 'auto' }}>
+        {
+          books.map((book, index) => (
+            <Box key={index} sx={{ display: 'flex', borderRadius: 4, borderStyle: 'solid', borderWidth: 2, borderColor: 'primary.main', padding: 1, gap: 2 }}>
+              <Box>
+                <img style={{ borderRadius: 4 }} src={book.coverUrl} />
+              </Box>
+              <Box sx={{ display: 'flex', minWidth: 0, flexDirection: 'column' }}>
+                <p style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100%', overflow: 'hidden', fontSize: '20px', alignSelf: 'start' }}>{book.title}</p>
+                <p style={{ textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: '100%', overflow: 'hidden', alignSelf: 'start' }}>{book.author}</p>
+              </Box>
+            </Box>
+          ))
+        }
+
       </div>
     </div>
   )
